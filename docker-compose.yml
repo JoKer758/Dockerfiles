@@ -1,26 +1,27 @@
 nginx:
-    build: ./nginx
+    image: eva/nginx
     ports:
       - "80:80"
     links:
       - "php"
     volumes:
       - ~/opt:/opt
+      - /Users/joker/opt/htdocs/Dockerfiles/nginx/sites-enabled:/etc/nginx/conf.d/
+
 
 php:
-    build: ./php
+    image: eva/php
     ports:
       - "9000:9000"
     links:
       - "mysql"
       - "memcache"
       - "redis"
-      - "gearman"
     volumes:
       - ~/opt:/opt
 
 mysql:
-    build: ./mysql
+    image: eva/mysql
     ports:
       - "3306:3306"
     volumes:
@@ -29,18 +30,12 @@ mysql:
       MYSQL_ROOT_PASSWORD: 123456
 
 memcache:
-    build: ./memcache
+    image: memcached:1.4
     ports:
       - "11211:11211"
 
 redis:
-    build: ./redis
+    image: redis:3.0
     ports:
       - "6379:6379"
 
-gearman:
-    build: ./gearman
-    ports:
-      - "4730:4730"
-    volumes:
-      - ~/opt:/opt

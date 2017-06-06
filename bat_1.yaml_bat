@@ -1,0 +1,84 @@
+dpool_nginx:
+    image: eva/nginx
+    container_name: dpool_nginx
+    ports:
+      - "80:80"
+    links:
+      - dpool_php
+    volumes:
+      - ~/opt:/opt
+
+dpool_php:
+    image: eva/php
+    container_name: dpool_php
+    ports:
+      - "9000:9000"
+    links:
+      - dpool_mysql
+      - dpool_memcache
+      - dpool_redis
+    volumes:
+      - ~/opt:/opt
+
+dpool_mysql:
+    image: eva/mysql
+    container_name: dpool_mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/opt/data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+
+dpool_memcache:
+    image: memcached:1.4
+    container_name: dpool_memcache
+    ports:
+      - "11211:11211"
+
+dpool_redis:
+    image: redis:3.0
+    container_name: dpool_redis
+    ports:
+      - "6379:6379"
+nginx:
+    image: eva/nginx
+    ports:
+      - "80:80"
+    links:
+      - "php"
+    volumes:
+      - ~/opt:/opt
+
+php:
+    image: eva/php
+    ports:
+      - "9000:9000"
+    links:
+      - "mysql"
+      - "memcache"
+      - "redis"
+      - "gearman"
+    volumes:
+      - ~/opt:/opt
+
+mysql:
+    image: eva/mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/opt/data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+
+memcache:
+    image: memcached:1.4
+    ports:
+      - "11211:11211"
+
+redis:
+    image: redis:3.0
+    ports:
+      - "6379:6379"
+
+
