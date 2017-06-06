@@ -11,3 +11,22 @@ $redis->lpush("tutorial-list", "Mysql");
 $arList = $redis->lrange("tutorial-list", 0 ,5);
 echo "Stored string in redis";
 print_r($arList);
+
+
+
+1安装php扩展
+docker exec -it dockerfiles_php_1 bash
+cd /usr/local/bin
+./docker-php-ext-install pdo_mysql
+
+2修改镜像
+docker ps
+f31d4daf34fa        eva/php            dockerfiles_php_1
+sudo docker commit f31d4daf34fa eva1/php
+
+3修改docker-compose.yml文件中的php镜像为
+image: eva1/php
+
+4重启
+docker-compose stop
+docker-compose up -d

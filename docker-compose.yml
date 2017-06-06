@@ -10,7 +10,7 @@ nginx:
 
 
 php:
-    image: eva/php
+    image: eva1/php
     ports:
       - "9000:9000"
     links:
