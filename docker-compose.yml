@@ -1,5 +1,5 @@
 nginx:
-    image: eva/nginx
+    image: joker758/nginx:v1.0
     ports:
       - "80:80"
     links:
@@ -10,7 +10,7 @@ nginx:
 
 
 php:
-    image: eva1/php
+    image: joker758/php:v1.0
     ports:
       - "9000:9000"
     links:
@@ -21,7 +21,7 @@ php:
       - ~/opt:/opt
 
 mysql:
-    image: eva/mysql
+    image: joker758/mysql:v1.0
     ports:
       - "3306:3306"
     volumes:
@@ -30,12 +30,12 @@ mysql:
       MYSQL_ROOT_PASSWORD: 123456
 
 memcache:
-    image: memcached:1.4
+    image: joker758/memcached:v1.0
     ports:
       - "11211:11211"
 
 redis:
-    image: redis:3.0
+    image: joker758/redis:v1.0
     ports:
       - "6379:6379"
 
