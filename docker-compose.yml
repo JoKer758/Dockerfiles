@@ -14,25 +14,25 @@ php:
     ports:
       - "9000:9000"
     links:
-      - "mysql"
-      - "memcache"
+      # - "mysql"
+      # - "memcache"
       - "redis"
     volumes:
       - ~/opt:/opt
 
-mysql:
-    image: joker758/mysql:v1.0
-    ports:
-      - "3306:3306"
-    volumes:
-      - ~/opt/data/mysql:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
+# mysql:
+#     image: joker758/mysql:v1.0
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - ~/opt/data/mysql:/var/lib/mysql
+#     environment:
+#       MYSQL_ROOT_PASSWORD: 123456
 
-memcache:
-    image: joker758/memcached:v1.0
-    ports:
-      - "11211:11211"
+# memcache:
+#     image: joker758/memcached:v1.0
+#     ports:
+#       - "11211:11211"
 
 redis:
     image: joker758/redis:v1.0
